@@ -79,6 +79,7 @@ public class DBHandler {
 		try {
 			return preparedStatement.executeUpdate();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new ModelException("Erro ao executar SQL", e);
 		} finally{
 			close();
