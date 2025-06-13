@@ -9,14 +9,14 @@
 		    <span class="icon-bar"></span>
 		   </button>
 			<a class="navbar-brand" href="${pageContext.request.contextPath}">
-		    	<span><img height="30px" width="30px" alt="PM" src="${pageContext.request.contextPath}/images/logo.png"><strong>&nbspCRUD Manager</strong></strong></span>
+		    	<span><img height="30px" width="30px" alt="PM" src="${pageContext.request.contextPath}/images/logo.jpg"><strong>&nbspGestão de Livros</strong></strong></span>
 		    </a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="${pageContext.request.contextPath}"><span class="glyphicon glyphicon-home" /><strong>&nbspInício</strong></a></li>
+				<li><a href="${pageContext.request.contextPath}/index.jsp"><span class="glyphicon glyphicon-home" /><strong>&nbspInício</strong></a></li>
 				<li><a href="${pageContext.request.contextPath}/users"><span class="glyphicon glyphicon-user" /><strong>&nbspUsuários</strong></a></li>
-				<li><a href="${pageContext.request.contextPath}"><span class="glyphicon glyphicon-pencil" /><strong>&nbspPosts</strong></a></li>
+				<li><a href="${pageContext.request.contextPath}/posts"><span class="glyphicon glyphicon-pencil" /><strong>&nbspPosts</strong></a></li>
 				<li><a href="${pageContext.request.contextPath}/companies"><span class="glyphicon glyphicon-pushpin" /><strong>&nbspEmpresas</strong></a></li>
 				<li><a href="${pageContext.request.contextPath}/livros"><span class="glyphicon glyphicon-book" /><strong>&nbspLivros</strong></a></li>
 				<li class="dropdown">
@@ -24,7 +24,13 @@
 			        <span class="caret"></span></a>
 			        <ul class="dropdown-menu">
 			          <li><a href="#"><span class="glyphicon glyphicon-cog" /></span>&nbspDados cadastrais</a></li>
-			          <li><a href="#"><span class="glyphicon glyphicon-log-out" /></span>&nbspSair</a></li>
+			          <li>
+			            <form action="${pageContext.request.contextPath}/logout" method="get" style="margin: 0; padding: 0;">
+			              <button type="submit" class="btn btn-link" style="padding: 5px 20px; text-align: left; display: block; width: 100%;">
+			                <span class="glyphicon glyphicon-log-out"></span>&nbspSair
+			              </button>
+			            </form>
+			          </li>
 			        </ul>
 			    </li>
 			</ul>

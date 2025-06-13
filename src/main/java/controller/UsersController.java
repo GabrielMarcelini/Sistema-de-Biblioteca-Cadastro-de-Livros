@@ -12,6 +12,7 @@ import model.ModelException;
 import model.User;
 import model.dao.DAOFactory;
 import model.dao.UserDAO;
+import model.utils.PasswordEncryptor;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 
@@ -53,7 +54,7 @@ public class UsersController extends HttpServlet {
 		String action = req.getRequestURI();
 		
 		if (action == null || action.equals("") ) {
-			ControllerUtil.forward(req, resp, "/index.jsp");
+			ControllerUtil.forward(req, resp, "/posts.jsp");
 			return;
 		}
 		
@@ -119,11 +120,16 @@ public class UsersController extends HttpServlet {
 		String userName = req.getParameter("name");
 		String userGender = req.getParameter("gender");
 		String userEMail = req.getParameter("mail");
+		String userPassword = req.getParameter("user_pw");
 		
 		User user = new User();
 		user.setName(userName);
 		user.setGender(userGender);
 		user.setEmail(userEMail);
+		
+		if (userPassword != null && !userPassword.isBlank()) {
+			user.setPassword(PasswordEncryptor.hashPassword(userPassword));
+		}
 		
 		UserDAO dao = DAOFactory.createDAO(UserDAO.class);
 		
@@ -146,11 +152,16 @@ public class UsersController extends HttpServlet {
 		String userName = req.getParameter("name");
 		String userGender = req.getParameter("gender");
 		String userEMail = req.getParameter("mail");
+		String userPassword = req.getParameter("user_pw"); 
 		
 		User user = loadUser(req);
 		user.setName(userName);
 		user.setGender(userGender);
 		user.setEmail(userEMail);
+		
+		if (userPassword != null && !userPassword.isBlank()) {
+			user.setPassword(PasswordEncryptor.hashPassword(userPassword));
+		}
 		
 		UserDAO dao = DAOFactory.createDAO(UserDAO.class);
 		

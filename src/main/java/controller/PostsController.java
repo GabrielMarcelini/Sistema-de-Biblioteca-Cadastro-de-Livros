@@ -18,7 +18,7 @@ import model.dao.PostDAO;
 @SuppressWarnings("serial")
 // Herda da classe HttpServlet (extends HttpServlet) para ser tratada como um Servlet
 // Anota a classe (@WebServlet) ajustando as URLs (urlPatterns) as quais ela responde
-@WebServlet(urlPatterns = {"", "/posts", "/post/form", "/post/delete", "/post/insert", "/post/update"})
+@WebServlet(urlPatterns = {"/posts", "/post/form", "/post/delete", "/post/insert", "/post/update"})
 public class PostsController extends HttpServlet {
 	
 	// Sobrescreve o método doGet, sendo capaz de responder métodos HTTP GET
@@ -46,7 +46,7 @@ public class PostsController extends HttpServlet {
 			
 			ControllerUtil.transferSessionMessagesToRequest(req);
 		
-			ControllerUtil.forward(req, resp, "/index.jsp");
+			ControllerUtil.forward(req, resp, "/posts.jsp");
 		}
 	}
 	
@@ -56,7 +56,7 @@ public class PostsController extends HttpServlet {
 		String action = req.getRequestURI();
 		
 		if (action == null || action.equals("") ) {
-			ControllerUtil.forward(req, resp, "/index.jsp");
+			ControllerUtil.forward(req, resp, "/posts.jsp");
 			return;
 		}
 		

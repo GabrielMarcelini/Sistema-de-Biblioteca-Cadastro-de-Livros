@@ -4,7 +4,7 @@
 <html>
 <head>
 	<%@include file="base-head.jsp"%>
-	<title>CRUD Manager - Empresas</title>
+	<title>CRUD Manager - Bibliotecas</title>
 </head>
 <body>
 	<%@include file="modal.html"%>
@@ -18,7 +18,7 @@
 		
 		<div id="top" class="row">
  			<div class="col-md-3">
-		        <h3>Empresas</h3>
+		        <h3>Bibliotecas</h3>
 		    </div>
 		 
 		    <div class="col-md-6">
@@ -45,10 +45,10 @@
 		            <thead>
 		                <tr>
 		                    <th>Nome</th>
-		                    <th>Cargo</th>
+		                    <th>Objetivo</th>
 		                    <th>Início</th>
-		                    <th>Saída</th>
-		                    <th>Usuário</th>
+		                    <th>Fechamento</th>
+		                    <th>Responsável</th>
 		                    <th>Editar</th>
 		                    <th>Excluir</th>
 		                 </tr>

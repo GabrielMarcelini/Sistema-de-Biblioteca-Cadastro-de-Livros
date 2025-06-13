@@ -1,113 +1,88 @@
-<jsp:directive.page contentType="text/html; charset=UTF-8" />
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="pt-br">
-	<head>
-		<%@include file="base-head.jsp"%>
-	</head>
-	<body>
-		<%@include file="modal.html"%>
-		<%@include file="nav-menu.jsp"%>
-					
-		<div id="container" class="container-fluid">
-			<div id="alert" style="${not empty message ? 'display: block;' : 'display: none;'}" class="alert alert-dismissable ${alertType eq 1 ? 'alert-success' : 'alert-danger'}">
-			  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			  ${message}
-			</div>
-		
-	 	 	<div id="top" class="row">
-	 			<div class="col-md-3">
-			        <h3>Posts</h3>
-			    </div>
-			 
-			    <div class="col-md-6">
-			        <div class="input-group h2">
-			            <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar posts">
-			            <span class="input-group-btn">
-			                <button class="btn btn-danger" type="submit">
-			                    <span class="glyphicon glyphicon-search"></span>
-			                </button>
-			            </span>
-			        </div>
-			    </div>
-			 
-			    <div class="col-md-3">
-			        <a href="/crud-manager/post/form" class="btn btn-danger pull-right h2"><span class="glyphicon glyphicon-plus" /></span>&nbspAdicionar Post</a>
-			    </div>
-	     	</div>
-	 
-	     	<hr />
-	     	
-	     	<div id="list" class="row">
-	     		<div class="table-responsive col-md-12">
-			        <table class="table table-striped table-hover" cellspacing="0" cellpadding="0">
-			            <thead>
-			                <tr>
-			                    <th>Data</th>
-			                    <th>Conteúdo</th>
-			                    <th>Usuário</th>
-			                    <th>Editar</th>
-			                    <th>Excluir</th>
-			                 </tr>
-			            </thead>
-			            <tbody>
-			            	<c:forEach var="post" items="${posts}">
-								<tr>
-				                    <td>${post.getPostDate()}</td>
-				                    <td>${post.getContent()}</td>
-				                    <td>${post.getUser().getName()}</td>				                    
-				                    <td class="actions">
-				                        <a class="btn btn-info btn-xs" 
-				                           href="${pageContext.request.contextPath}/post/update?postId=${post.getId()}" >
-				                           <span class="glyphicon glyphicon-edit"></span>
-				                        </a>
-				                    </td>
-				                    <td class="actions">
-				                        <a class="btn btn-danger btn-xs modal-remove" post-id="${post.getId()}" 
-				                           post-content="${post.getContent()}" data-toggle="modal" 
-				                           data-target="#delete-modal"  href="#"><span 
-				                           class="glyphicon glyphicon-trash"></span></a>
-				                    </td>
-				                </tr>
-							</c:forEach>
-			            </tbody>
-			         </table>
-			 
-			     </div>
-	     	</div>
-	 
-	     	<div id="bottom" class="row">
-	     		<div class="col-md-12">
-			        <ul class="pagination">
-			            <li class="disabled"><a>&lt; Anterior</a></li>
-			            <li class="disabled"><a>1</a></li>
-			            <li><a href="#">2</a></li>
-			            <li><a href="#">3</a></li>
-			            <li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
-			        </ul><!-- /.pagination -->
-			    </div>
-	     	</div>
-		</div>
-		
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-			    // fecha o alert após 3 segundos
-			    setTimeout(function() {
-			        $("#alert").slideUp(500);
-			    }, 3000);
-			    
-			    // ao clicar no delete de algum post, pega o nome do usuário, 
-			    // o id do usuário e a ação (delete) e envia para o modal 
-			    $(".modal-remove").click(function () {
-		            var postContent = $(this).attr('post-content');
-		            var postId = $(this).attr('post-id');
-		            $(".modal-body #hiddenValue").text("o post '"+postContent+"'");
-		            $("#id").attr( "value", postId);
-		            $("#form").attr( "action","post/delete");
-		        })
-			});
-		</script>
-	</body>
+<head>
+    <%@ include file="base-head.jsp" %>
+    <title>Início - Sistema de Livros</title>
+    <style>
+        .banner {
+            background: url('images/livros-banner.jpg') no-repeat center center;
+            background-size: cover;
+            height: 350px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .banner h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+        }
+
+        .features {
+            margin-top: 40px;
+        }
+
+        .card-icon {
+            font-size: 48px;
+            color: #007bff;
+        }
+    </style>
+    <!-- Ícones Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <%@ include file="nav-menu.jsp" %>
+
+    <!-- Banner com imagem -->
+    <div class="banner">
+        <div>
+            <h1>Bem-vindo ao Sistema de Gestão de Livros</h1>
+            <p>Organize, cadastre e mantenha controle total da sua biblioteca empresarial.</p>
+        </div>
+    </div>
+
+    <!-- Destaques / Ações principais -->
+    <div class="container features">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <div class="card-icon mb-2"><i class="bi bi-book"></i></div>
+                        <h5 class="card-title">Listar Livros</h5>
+                        <p class="card-text">Veja todos os livros cadastrados no sistema com suas respectivas informações.</p>
+                        <a href="${pageContext.request.contextPath}/livros" class="btn btn-primary">Acessar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <div class="card-icon mb-2"><i class="bi bi-journal-plus"></i></div>
+                        <h5 class="card-title">Cadastrar Livro</h5>
+                        <p class="card-text">Adicione novos livros informando título, autor, editora, ano, Biblioteca e mais.</p>
+                        <a href="${pageContext.request.contextPath}/livro/form" class="btn btn-primary">Cadastrar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <div class="card-icon mb-2"><i class="bi bi-building"></i></div>
+                        <h5 class="card-title">Bibliotecas</h5>
+                        <p class="card-text">Gerencie Bibliotecas associadas aos livros.</p>
+                        <a href="${pageContext.request.contextPath}/companies" class="btn btn-primary">Bibliotecas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
 </html>

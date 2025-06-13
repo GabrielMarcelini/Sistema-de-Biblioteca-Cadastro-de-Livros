@@ -29,7 +29,7 @@
 				</div>
 				
 				<div class="form-group col-md-6">
-					<label for="role">Cargo</label>
+					<label for="role">Objetivo</label>
 					<input type="text" class="form-control" id="role" name="role" 
 						   autofocus="autofocus" placeholder="Cargo ocupado" 
 						   required 
